@@ -1,7 +1,8 @@
-package android.shj.wankt
+package android.shj.wankt.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.shj.wankt.R
 
 class MainActivity : AppCompatActivity() {
 
