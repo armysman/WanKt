@@ -1,9 +1,12 @@
 package android.shj.wankt.base
 
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
@@ -24,7 +27,9 @@ import kotlinx.coroutines.cancel
 abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity(),
     CoroutineScope by MainScope() {
 
-    protected val mbinding: VB by lazy {
+    private var mPermissionListener: PermissionListener? = null
+
+    protected val mBinding: VB by lazy {
         DataBindingUtil.setContentView(this, getLayoutId()) as VB
     }
 
@@ -32,7 +37,7 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         ActivityStackManager.addActivity(this)
         if (needTransparentStatus()) transparentStatusBar()
-        mbinding.lifecycleOwner = this
+        mBinding.lifecycleOwner = this
         initActivity(savedInstanceState)
     }
 
@@ -54,10 +59,53 @@ abstract class BaseActivity<VB : ViewDataBinding> : AppCompatActivity(),
 
     fun <T : ViewModel> getViewModel(clazz: Class<T>): T = ViewModelProvider(this).get(clazz)
 
+    fun onRuntimePermissionAsk(permissions: Array<String>, listener: PermissionListener) {
+        this.mPermissionListener = listener
+        val activity = ActivityStackManager.getTopActivity()
+        val deniedPermissions: MutableList<String> = mutableListOf()
+
+        permissions
+            .filterNot {
+                ContextCompat.checkSelfPermission(
+                    activity!!,
+                    it
+                ) == PackageManager.PERMISSION_GRANTED
+            }
+            .forEach { deniedPermissions.add(it) }
+
+        if (deniedPermissions.isEmpty())
+            mPermissionListener!!.onGranted()
+        else
+            ActivityCompat.requestPermissions(activity!!, deniedPermissions.toTypedArray(), 1)
+
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1) {
+            val deniedPermissions: MutableList<String> = mutableListOf()
+            if (grantResults.isNotEmpty()) {
+                for (i in grantResults.indices) {
+                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED)
+                        deniedPermissions.add(permissions[i])
+                }
+                if (deniedPermissions.isEmpty()) {
+                    mPermissionListener!!.onGranted()
+                } else {
+                    mPermissionListener!!.onDenied(deniedPermissions)
+                }
+            }
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         ActivityStackManager.removeActivity(this)
         cancel()
-        mbinding.unbind()
+        mBinding.unbind()
     }
 }
