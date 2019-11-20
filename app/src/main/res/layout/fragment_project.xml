@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/srl_home"
+            android:id="@+id/srl_project"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -22,20 +22,21 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/title_home"
+                <android.shj.wankt.view.CenterDrawableTextView
+                    android:id="@+id/title_project"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_arrow_drop_down_accent_24dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_home"
+                    android:id="@+id/recycler_project"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <android.shj.wankt.view.StatusError
-            android:id="@+id/error_home"
+            android:id="@+id/error_project"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </FrameLayout>

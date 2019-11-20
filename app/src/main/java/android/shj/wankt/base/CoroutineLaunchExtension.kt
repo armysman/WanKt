@@ -22,7 +22,7 @@ private fun coroutineExceptionHandler(
 
 private fun coroutineExceptionContext(
     throwableHandler: CoroutineThrowableHandler = DEFAULT_HANDLER
-): CoroutineContext = coroutineExceptionContext(throwableHandler) + GlobalScope.coroutineContext
+): CoroutineContext = coroutineExceptionHandler(throwableHandler) + GlobalScope.coroutineContext
 
 fun CoroutineScope.safeLaunch(
     block: suspend () -> Unit,

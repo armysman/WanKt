@@ -1,5 +1,8 @@
 package android.shj.wankt.http
 
+import android.shj.wankt.bean.HomeBannerEntity
+import retrofit2.http.GET
+
 /**********************************************************
  *  ApiService.java  2019-11-19
  *  <p>
@@ -10,4 +13,6 @@ package android.shj.wankt.http
  *  @author:shuhj
  ***********************************************************/
 interface ApiService {
+    @GET("/banner/json")
+    suspend fun homeBanner():HomeBannerEntity
 }

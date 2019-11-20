@@ -5,6 +5,29 @@
 
     <data>
 
+        <variable
+            name="holder"
+            type="android.shj.wankt.ui.main.MainFragment" />
+
+        <variable
+            name="viewMolde"
+            type="android.shj.wankt.ui.main.MainViewModel" />
+
+        <variable
+            name="listener"
+            type="com.youth.banner.listener.OnBannerListener" />
+
+        <variable
+            name="adapter"
+            type="android.shj.wankt.base.BaseFragmentPageAdapter" />
+
+        <variable
+            name="limit"
+            type="Integer" />
+
+        <variable
+            name="transformer"
+            type="androidx.viewpager.widget.ViewPager.PageTransformer" />
 
     </data>
 
@@ -13,9 +36,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/image_place_holder"
+                app:banner_default_image="@drawable/image_place_holder"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:bannerClick="@{listener}"
+                bind:banners="@{viewMolde.banners}"/>
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/main_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:clipChildren="false"
+                android:overScrollMode="never"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/banner"
+                bind:adapter="@{adapter}"
+                bind:limitOffset="@{limit}"
+                bind:reversed="@{true}"
+                bind:transformer="@{transformer}" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_left"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="main" />
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            android:overScrollMode="never"
+            app:menu="@menu/menu_main" />
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

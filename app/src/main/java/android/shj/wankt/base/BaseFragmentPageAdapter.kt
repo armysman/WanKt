@@ -15,7 +15,7 @@ import androidx.fragment.app.FragmentPagerAdapter
  ***********************************************************/
 class BaseFragmentPageAdapter(
     fragmentManager: FragmentManager,
-    fragments: Array<out Fragment>,
+    fragments: ArrayList<out Fragment>,
     titles: Array<String>? = null
 ) : FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 

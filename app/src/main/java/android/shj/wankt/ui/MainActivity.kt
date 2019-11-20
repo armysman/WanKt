@@ -1,6 +1,7 @@
 package android.shj.wankt.ui
 
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
@@ -8,6 +9,7 @@ import android.os.Bundle
 import android.shj.wankt.R
 import android.shj.wankt.base.BaseActivity
 import android.shj.wankt.databinding.ActivityMainBinding
+import android.shj.wankt.ui.main.MainFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
     private var availabelCount = 0
@@ -41,7 +43,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     private fun checkState() {
-        mbinding.netAvailabel = availabelCount > 0
+        mBinding.netAvailabel = availabelCount > 0
     }
 
     override fun onDestroy() {
@@ -50,5 +52,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun needTransparentStatus(): Boolean = true
+
+    override fun onBackPressed() {
+        supportFragmentManager.fragments.first()
+            .childFragmentManager.fragments.last().let {
+//            if (it is MainFragment) {
+//                startActivity(Intent(Intent.ACTION_MAIN).apply {
+//                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//                    addCategory(Intent.CATEGORY_HOME)
+//                })
+//                return
+//            }
+        }
+        super.onBackPressed()
+    }
 
 }

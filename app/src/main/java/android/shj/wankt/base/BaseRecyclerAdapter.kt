@@ -55,6 +55,11 @@ abstract class BaseRecyclerAdapter<T>(var mData: MutableList<T>?) :
         }
     }
 
+    fun updateSelectionPosition(position: Int) {
+        this.mSelectPosition = position
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int = mData?.size ?: 0
     /**
      * 获取对应 position 下的数据

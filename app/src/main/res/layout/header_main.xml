@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="holder"
+            type="android.shj.wankt.ui.main.MainFragment" />
+
+        <variable
+            name="name"
+            type="String" />
+
+        <variable
+            name="coinSpan"
+            type="android.text.SpannableStringBuilder" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingTop="50dp"
+        android:paddingEnd="20dp">
+
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:contentDescription="@null"
+            android:onClick="@{holder::showHeaderDialog}"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:circleImg="@{@drawable/ic_header}" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="4dp"
+            android:drawableStart="@drawable/ic_people_outline_black_18dp"
+            android:drawablePadding="4dp"
+            android:onClick="@{holder::headerLogin}"
+            android:text="@{name}"
+            android:textColor="@color/half_black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/avatar"
+            app:layout_constraintTop_toTopOf="@id/avatar"
+            tools:text="kk" />
+
+        <TextView
+            android:id="@+id/user_coins"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:drawableStart="@drawable/ic_coin_18dp"
+            android:drawablePadding="4dp"
+            android:gravity="center_vertical"
+            android:onClick="@{holder::userCoins}"
+            android:singleLine="true"
+            android:text="@{coinSpan}"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/avatar"
+            app:layout_constraintTop_toBottomOf="@id/user_name"
+            tools:text="10234" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
