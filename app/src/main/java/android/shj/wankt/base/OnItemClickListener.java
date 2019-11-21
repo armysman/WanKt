@@ -1,9 +1,9 @@
-package android.shj.wankt.base
+package android.shj.wankt.base;
 
-import android.view.View
+import android.view.View;
 
 /**********************************************************
- *  OnItemClickListener.java  2019-11-19
+ *  OnItemClickListener.java  2019-11-21
  *  <p>
  *  描述
  *  </p>
@@ -11,6 +11,6 @@ import android.view.View
  *
  *  @author:shuhj
  ***********************************************************/
-interface OnItemLongClickListener {
-    fun onItemLongClick(position: Int, view: View):Boolean
+public interface OnItemClickListener {
+    void onItemClick(int position, View view);
 }

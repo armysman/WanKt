@@ -33,9 +33,9 @@ fun CoroutineScope.safeLaunch(
 
 fun CoroutineScope.delayLaunch(
     timeMills: Long,
-    block: suspend () -> Unit,
     context: CoroutineContext = EmptyCoroutineContext,
-    start: CoroutineStart = CoroutineStart.DEFAULT
+    start: CoroutineStart = CoroutineStart.DEFAULT,
+    block: suspend () -> Unit
 ): Job = launch(context, start) {
     check(timeMills > 0) {
         "timeMills must be positive"

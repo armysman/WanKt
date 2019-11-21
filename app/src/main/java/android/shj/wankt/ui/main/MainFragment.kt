@@ -7,6 +7,7 @@ import android.shj.wankt.base.BaseFragmentPageAdapter
 import android.shj.wankt.databinding.FragmentMainBinding
 import android.shj.wankt.databinding.HeaderMainBinding
 import android.shj.wankt.db.PreferencesHelper
+import android.shj.wankt.ui.dialog.LoginDialogFragment
 import android.shj.wankt.ui.home.HomeFragment
 import android.shj.wankt.ui.project.ProjectFragment
 import android.shj.wankt.ui.stage.StageFragment
@@ -15,10 +16,12 @@ import android.shj.wankt.ui.wxpublic.WxPublicFragment
 import android.shj.wankt.utils.GalleryTransformer
 import android.shj.wankt.utils.ScreenUtils
 import android.view.View
+import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.youth.banner.listener.OnBannerListener
+import kotlinx.android.synthetic.main.dialog_login.view.*
 import org.jetbrains.anko.toast
 
 /**********************************************************
@@ -83,7 +86,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         })
 
         mViewModel.coins.observe(this, Observer {
-            it?.let { }
+            it?.let {
+
+            }
         })
         mViewModel.getBanners()
 
@@ -120,7 +125,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     fun showHeaderDialog(view: View) {}
 
-    fun headerLogin(view: View) {}
+    fun headerLogin(view: View) {
+        mBinding.drawer.closeDrawer(GravityCompat.START)
+        LoginDialogFragment().show(requireActivity().supportFragmentManager, "login")
+    }
 
     fun userCoins(view: View) {}
 

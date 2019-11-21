@@ -21,7 +21,8 @@ import kotlinx.coroutines.withContext
 class MainRepository {
 
     fun getCachedBanners(): List<BannerData>? =
-        Gson().fromJson(PreferencesHelper.fetchBannerCache(MyApplication.instance),
+        Gson().fromJson(
+            PreferencesHelper.fetchBannerCache(MyApplication.instance),
             object : TypeToken<List<BannerData>>() {}.type
         )
 
@@ -30,7 +31,16 @@ class MainRepository {
 
     }
 
-    suspend fun getHomeBanners()= withContext(Dispatchers.IO){
+    suspend fun getHomeBanners() = withContext(Dispatchers.IO) {
         RetrofitManager.apiService.homeBanner().data
+    }
+
+    suspend fun register(username: String, password: String, repeatPassword: String) =
+        withContext(Dispatchers.IO) {
+            RetrofitManager.apiService.register(username, password, repeatPassword)
+        }
+
+    suspend fun login(username: String, password: String) = withContext(Dispatchers.IO) {
+        RetrofitManager.apiService.login(username, password)
     }
 }
