@@ -7,6 +7,7 @@ import android.shj.wankt.bean.CoinsData
 import android.shj.wankt.bean.WanUserEntity
 import android.shj.wankt.db.PreferencesHelper
 import android.text.TextUtils
+import android.util.SparseArray
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -88,6 +89,7 @@ class MainViewModel(private val repository: MainRepository) : ViewModel() {
     private fun saveUser(info: Response<WanUserEntity>) {
         if (info.body()?.errorCode == 0) {
             val cookies = StringBuilder()
+
 
             info.headers().filter {
                 TextUtils.equals(it.first, "Set-Cookie")

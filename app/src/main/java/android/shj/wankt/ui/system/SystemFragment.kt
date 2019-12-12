@@ -1,9 +1,11 @@
 package android.shj.wankt.ui.system
 
+import android.content.Context
 import android.os.Bundle
 import android.shj.wankt.R
 import android.shj.wankt.base.BaseFragment
 import android.shj.wankt.databinding.FragmentSystemBinding
+import android.shj.wankt.ui.MainActivity
 import android.view.View
 
 /**********************************************************
@@ -16,6 +18,7 @@ import android.view.View
  *  @author:shuhj
  ***********************************************************/
 class SystemFragment:BaseFragment<FragmentSystemBinding>() {
+
     override fun iniFragment(view: View, savedInstanceState: Bundle?) {
 
     }
